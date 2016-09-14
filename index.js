@@ -1,5 +1,4 @@
 import { EventEmitter } from 'events';
-import net from 'net';
 import util from 'util';
 
 // Platform Shim for HTTP audio zone
@@ -33,7 +32,7 @@ function makeVolumeCharacteristic() {
       maxValue: 100,
       minValue: 0,
       minStep: 1,
-      perms: [Characteristic.Perms.READ, Characteristic.Perms.WRITE, Characteristic.Perms.NOTIFY]
+      perms: [Characteristic.Perms.READ, Characteristic.Perms.WRITE, Characteristic.Perms.NOTIFY],
     });
     this.value = this.getDefaultValue();
   };
@@ -65,7 +64,7 @@ class AudioZoneItem {
         });
         break;
       default:
-        console.log('UNKNOWN', type);
+        this.platform[priv].log(`requested info for ${type}`);
         callback();
         break;
     }
